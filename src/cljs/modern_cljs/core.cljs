@@ -2,7 +2,7 @@
 
 (enable-console-print!)
 
-(println "Hello, Folks!")
+(println "Hello, World!")
 
 (comment
 
