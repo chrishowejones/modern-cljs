@@ -18,13 +18,13 @@
          '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
          )
 
-(deftask development
+(deftask dev
   "Launch Immediate Feedback Development Environment"
   []
   (comp
-   (serve :reload true)
-   (reload)
+   (serve :dir "target")
    (watch)
-   (cljs-repl)
+   (reload)
+   (cljs-repl) ;; before cljs task
    (cljs)
    (target :dir #{"target"})))
