@@ -10,7 +10,7 @@
                  [adzerk/boot-cljs-repl "0.3.3"]
                  [com.cemerick/piggieback "0.2.1" :scope "test"]
                  [weasel "0.7.0" :scope "test" :exclusions [org.clojure/clojurescript]]
-                 ])
+                 [org.clojars.magomimmo/domina "2.0.0-SNAPSHOT"]])
 
 (require '[adzerk.boot-cljs :refer [cljs]]
          '[pandeiro.boot-http :refer [serve]]

@@ -1,15 +1,14 @@
-(ns modern-cljs.login)
+(ns modern-cljs.login
+  (:require [domina.core :refer [by-id value set-value!]]))
 
 ;; define the function to be attached to form submission event
 (defn validate-form
   []
-  (let [email (.getElementById js/document "email")
-        password (.getElementById js/document "password")]
-    (if (and (> (count (.-value email)) 0)
-             (> (count (.-value password)) 0))
-      true
-      (do (js/alert "Please, complete the form!")
-          false))))
+  (if (and (> (count (value (by-id "email"))) 0)
+           (> (count (value (by-id "password"))) 0))
+    true
+    (do (js/alert "Please, complete the form!")
+        false)))
 
 ;; define the function to attach validate-form to onsubmit event of the form
 (defn init []
@@ -19,7 +18,6 @@
     ;; get loginForm by element id and set its onsubmit property to
     ;; our validate-form function
     (let [login-form (.getElementById js/document "loginForm")]
-      (.log js/console "loginForm=" login-form)
       (set! (.-onsubmit login-form) validate-form))))
 
 ;; initialise the HTML page in an unobtrusive way
