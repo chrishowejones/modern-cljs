@@ -11,7 +11,7 @@
         false)))
 
 ;; define the function to attach validate-form to onsubmit event of the form
-(defn init []
+(defn ^:export init []
   ;;verify that js/document exists and that it has a getElementById property
   (if (and js/document
            (.-getElementById js/document))
@@ -19,6 +19,3 @@
     ;; our validate-form function
     (let [login-form (.getElementById js/document "loginForm")]
       (set! (.-onsubmit login-form) validate-form))))
-
-;; initialise the HTML page in an unobtrusive way
-(set! (.-onload js/window) init)
