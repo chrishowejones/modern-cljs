@@ -1,6 +1,8 @@
 (ns modern-cljs.shopping
-  (:require [domina.core :refer [by-id value set-value!]]
-            [domina.events :refer [listen!]]))
+  (:require [domina.core :refer [append! by-class by-id destroy! value set-value!]]
+            [domina.events :refer [listen!]]
+            [hiccups.runtime])
+  (:require-macros [hiccups.core :refer [html]]))
 
 (defn calculate
   "Calculate the total shopping order."
@@ -17,6 +19,13 @@
 
 (defn ^:export init
   []
-  (if (and js/document
+  (when (and js/document
            (.-getElementById js/document))
-    (listen! (by-id "calc") :click calculate)))
+    (listen! (by-id "calc") :click calculate)
+    (listen! (by-id "calc") :mouseover
+             (fn []
+               (append! (by-id "shoppingForm")
+                        (html [:div.help "Click to calculate"]))))
+    (listen! (by-id "calc") :mouseout
+             (fn []
+               (destroy! (by-class "help"))))))
