@@ -1,5 +1,6 @@
 (ns modern-cljs.shopping
-  (:require [domina.core :refer [by-id value set-value!]]))
+  (:require [domina.core :refer [by-id value set-value!]]
+            [domina.events :refer [listen!]]))
 
 (defn calculate
   "Calculate the total shopping order."
@@ -18,5 +19,4 @@
   []
   (if (and js/document
            (.-getElementById js/document))
-    (let [the-form (by-id "shoppingForm")]
-      (set! (.-onsubmit the-form) calculate))))
+    (listen! (by-id "calc") :click calculate)))
